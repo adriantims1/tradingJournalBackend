@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/6737c9b8-f370-4064-b98e-777a678b91b1/AppServices/subscriptions/6737c9b8-f370-4064-b98e-777a678b91b1/resourceGroups/tradingjournal/providers/Microsoft.Web/sites/tradingjournalbackend",
+    "appService.deploySubpath": "."
+}
