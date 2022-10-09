@@ -6,13 +6,16 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo"); // MongoDB session store
 const app = express();
 
+const tradeRouter = require("./routes/tradeRoute");
+const profileRouter = require("./routes/profileRoute");
+
 const sessionSecret = "secretString-sessionSecret";
-var mongoDB =
-  "mongodb+srv://adriantims:FKT7jkQq69PFEJhm@trajourn.qavvh1o.mongodb.net/?retryWrites=true&w=majority";
+var atlasMongoDB =
+  "mongodb+srv://adriantims:47ju9QfRFTx4XB6e@trajourn.qavvh1o.mongodb.net/?retryWrites=true&w=majority";
 
 // Session Store:
 const store = MongoStore.create({
-  mongoUrl: mongoDB,
+  mongoUrl: atlasMongoDB,
   secret: sessionSecret,
   touchAfter: 24 * 60 * 60,
 });
@@ -54,8 +57,21 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.use("/api/trade", tradeRouter);
+app.use("/api/profile", profileRouter);
 
 //---------------
+
+const azureCosmosDB =
+  "mongodb://trade-database:zDG9pnrkgAmF3kZI8cThtc3SSvSbDRtz7GWuMnoiYN6HAyS5ncBIFiLZ29otpotmUUcYOZPneXxkfCYIZ8ii8Q%3D%3D@trade-database.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@trade-database@";
+
+mongoose
+  .connect(azureCosmosDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connection is Successful"))
+  .catch((err) => console.log("MongoDB connection error:", err));
 
 var port = process.env.PORT || 5000;
 
