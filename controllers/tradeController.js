@@ -1,8 +1,23 @@
 const trade = require("./../models/tradeModel");
 
-exports.fetchAllTrades = async (req, res) => {
+exports.fetchAllTradesById = async (req, res) => {
   try {
-    const allTrades = await trade.find();
+    const allTrades = await trade.find({ userId: req.params.userId });
+    res.status(200).json({
+      status: "success",
+      data: allTrades,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "fail",
+      data: "Fetching All Trade Fails",
+    });
+  }
+};
+
+exports.fetchAllTradesByEmail = async (req, res) => {
+  try {
+    const allTrades = await trade.find({ userEmail: req.params.userEmail });
     res.status(200).json({
       status: "success",
       data: allTrades,
@@ -25,7 +40,7 @@ exports.addNewTrade = async (req, res) => {
   } catch (errors) {
     res.status(400).json({
       status: "fail",
-      data: "Check the request argument",
+      data: "Check the trade detail",
     });
   }
 };
