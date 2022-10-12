@@ -12,7 +12,7 @@ const tradeSchema = Schema({
   marketInformation: { type: String },
   timestamp: { type: Date, default: Date.now },
   takeProfitRatio: { type: Number },
-  trofitOrLossValue: { type: Number },
+  profitOrLossValue: { type: Number },
   tevelInformation: {
     type: String,
     enum: [
