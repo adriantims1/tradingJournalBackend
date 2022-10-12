@@ -4,17 +4,30 @@ require("mongoose-type-url");
 var Schema = mongoose.Schema;
 
 const tradeSchema = Schema({
-  userEmail: { type: String, required: true },
-  userId: { type: String, required: true },
+  userEmail: { type: String, required: [true, "userEmail is required"] },
+  userId: { type: String, required: [true, "userId is required"] },
   timeFrame: {
     type: String,
     enum: ["1m", "5m", "15m", "1h", "4h", "daily"],
-    required: true,
+    required: [true, "timeFrame is required"],
   },
-  marketInformation: { type: String, required: true },
-  timeStamp: { type: Date, default: Date.now, required: true },
-  takeProfitRatio: { type: Number, required: true },
-  profitOrLossValue: { type: Number, required: true },
+  marketInformation: {
+    type: String,
+    required: [true, "marketInformation is required"],
+  },
+  timeStamp: {
+    type: Date,
+    default: Date.now,
+    required: [true, "timeStamp is required"],
+  },
+  takeProfitRatio: {
+    type: Number,
+    required: [true, "takeProfitRatio is required"],
+  },
+  profitOrLossValue: {
+    type: Number,
+    required: [true, "profitOrLossValue is required"],
+  },
   levelInformation: {
     type: String,
     enum: [
@@ -29,22 +42,22 @@ const tradeSchema = Schema({
       "Floating",
       "None",
     ],
-    required: true,
+    required: [true, "levelInformation is required"],
   },
   indicatorSignalInformation: {
     type: String,
     enum: ["Single", "Double", "Triple", "None"],
-    required: true,
+    required: [true, "indicatorSignalInformation is required"],
   },
-  ATR: { type: Number, required: true },
+  ATR: { type: Number, required: [true, "ATR is required"] },
   breakInformation: {
     type: String,
     enum: ["Simple", "Two Candles", "Complex", "None"],
-    required: true,
+    required: [true, "breakInformation is required"],
   },
   entryScreenshot: {
     type: mongoose.SchemaTypes.Url,
-    required: true,
+    required: [true, "entryScreenshot is required"],
   },
 });
 
