@@ -13,7 +13,7 @@ const tradeSchema = Schema({
   timestamp: { type: Date, default: Date.now },
   takeProfitRatio: { type: Number },
   profitOrLossValue: { type: Number },
-  tevelInformation: {
+  levelInformation: {
     type: String,
     enum: [
       "Trend Break",
