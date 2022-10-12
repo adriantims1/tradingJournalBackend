@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route("/login").post(profileController.login);
 router.route("/logout").post(isLoggedIn, profileController.logout);
-router.route("/password").post(isLoggedIn, profileController.updatePassword);
+router.route("/password").put(isLoggedIn, profileController.updatePassword);
 router.route("/").post(profileController.signup);
 router.route("/").put(isLoggedIn, profileController.updateProfilePictureOrName);
 router.route("/").delete(isLoggedIn, profileController.deleteUser);
