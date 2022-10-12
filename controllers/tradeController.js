@@ -1,6 +1,6 @@
 const trade = require("./../models/tradeModel");
 
-exports.fetchAllTradesById = async (req, res) => {
+exports.fetchAllTradesByUserId = async (req, res) => {
   try {
     const allTrades = await trade.find({ userId: req.params.userId });
     res.status(200).json({
