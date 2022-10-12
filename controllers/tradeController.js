@@ -15,21 +15,6 @@ exports.fetchAllTradesById = async (req, res) => {
   }
 };
 
-exports.fetchAllTradesByEmail = async (req, res) => {
-  try {
-    const allTrades = await trade.find({ userEmail: req.params.userEmail });
-    res.status(200).json({
-      status: "success",
-      data: allTrades,
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: "fail",
-      data: "Fetching All Trade Fails",
-    });
-  }
-};
-
 exports.addNewTrade = async (req, res) => {
   try {
     const newTrade = new trade(req.body);
