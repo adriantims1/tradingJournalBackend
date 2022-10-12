@@ -4,15 +4,17 @@ require("mongoose-type-url");
 var Schema = mongoose.Schema;
 
 const tradeSchema = Schema({
-  username: { type: String },
-  timeframe: {
+  userEmail: { type: String, required: true },
+  userId: { type: String, required: true },
+  timeFrame: {
     type: String,
     enum: ["1m", "5m", "15m", "1h", "4h", "daily"],
+    required: true,
   },
-  marketInformation: { type: String },
-  timestamp: { type: Date, default: Date.now },
-  takeProfitRatio: { type: Number },
-  profitOrLossValue: { type: Number },
+  marketInformation: { type: String, required: true },
+  timeStamp: { type: Date, default: Date.now, required: true },
+  takeProfitRatio: { type: Number, required: true },
+  profitOrLossValue: { type: Number, required: true },
   levelInformation: {
     type: String,
     enum: [
@@ -27,18 +29,22 @@ const tradeSchema = Schema({
       "Floating",
       "None",
     ],
+    required: true,
   },
   indicatorSignalInformation: {
     type: String,
     enum: ["Single", "Double", "Triple", "None"],
+    required: true,
   },
-  ATR: { type: Number },
+  ATR: { type: Number, required: true },
   breakInformation: {
     type: String,
     enum: ["Simple", "Two Candles", "Complex", "None"],
+    required: true,
   },
   entryScreenshot: {
     type: mongoose.SchemaTypes.Url,
+    required: true,
   },
 });
 
