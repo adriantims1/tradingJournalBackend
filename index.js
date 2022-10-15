@@ -46,6 +46,12 @@ cloudinary.config({
 
 app.use(session(sessionConfig));
 app.use(bodyParser.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: "*",
+  })
+);
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   // console.log(req.method, req.path);
@@ -58,12 +64,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api/trade", tradeRouter);
 app.use("/api/profile", profileRouter);
-app.use(
-  cors({
-    credentials: true,
-    origin: "*",
-  })
-);
 
 //---------------
 
