@@ -48,7 +48,9 @@ exports.deleteTradeById = async (req, res) => {
 
 exports.uploadPicture = async (req, res) => {
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "Trade Pictures",
+    });
     res.status(201).json({
       status: "success",
       data: result.secure_url,

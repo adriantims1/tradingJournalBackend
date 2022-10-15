@@ -46,14 +46,6 @@ cloudinary.config({
 
 app.use(session(sessionConfig));
 app.use(bodyParser.json());
-
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: "https://www.adrianstudy.computer/",
-//   })
-// );
-
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   // console.log(req.method, req.path);
