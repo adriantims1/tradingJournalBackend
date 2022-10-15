@@ -49,7 +49,8 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: "*",
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
   })
 );
 app.use((req, res, next) => {
