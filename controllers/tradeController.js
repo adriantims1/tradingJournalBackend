@@ -1,5 +1,4 @@
 const trade = require("./../models/tradeModel");
-const axios = require("axios");
 const cloudinary = require("cloudinary").v2;
 
 exports.fetchAllTradesByUserId = async (req, res) => {
