@@ -1,4 +1,6 @@
 const trade = require("./../models/tradeModel");
+const axios = require("axios");
+const cloudinary = require("cloudinary").v2;
 
 exports.fetchAllTradesByUserId = async (req, res) => {
   try {
@@ -40,6 +42,21 @@ exports.deleteTradeById = async (req, res) => {
     res.status(404).json({
       status: "fail",
       data: "Check the trade id",
+    });
+  }
+};
+
+exports.uploadPicture = async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    res.status(201).json({
+      status: "success",
+      data: result.secure_url,
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      data: "Fail uploading picture",
     });
   }
 };

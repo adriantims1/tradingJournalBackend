@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo"); // MongoDB session store
+const cloudinary = require("cloudinary").v2;
 const app = express();
 
 const tradeRouter = require("./routes/tradeRoute");
@@ -36,6 +37,12 @@ const sessionConfig = {
     // TODO add: 'secure: true' once the website is hosted on HTTPS.
   },
 };
+
+cloudinary.config({
+  cloud_name: "desuwgavt",
+  api_key: "422624985768454",
+  api_secret: "3W4a6-TcbF0pNihj09aRsHZTglI",
+});
 
 app.use(session(sessionConfig));
 app.use(bodyParser.json());
