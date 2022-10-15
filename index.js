@@ -58,6 +58,12 @@ app.get("/", (req, res) => {
 });
 app.use("/api/trade", tradeRouter);
 app.use("/api/profile", profileRouter);
+app.use(
+  cors({
+    credentials: true,
+    origin: "*",
+  })
+);
 
 //---------------
 
