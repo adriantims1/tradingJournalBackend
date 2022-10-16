@@ -13,10 +13,11 @@ const upload = multer({
     cb(null, true);
   },
 });
+const { isLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.route("/:userId").get(tradeController.fetchAllTradesByUserId);
+router.route("/").get(isLoggedIn, tradeController.fetchAllTradesByUserId);
 router.route("/").post(tradeController.addNewTrade);
 router.route("/").delete(tradeController.deleteTradeById);
 router

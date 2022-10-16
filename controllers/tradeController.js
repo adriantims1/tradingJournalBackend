@@ -3,7 +3,7 @@ const cloudinary = require("cloudinary").v2;
 
 exports.fetchAllTradesByUserId = async (req, res) => {
   try {
-    const allTrades = await trade.find({ userId: req.params.userId });
+    const allTrades = await trade.find({ userId: req.session.userId });
     res.status(200).json({
       status: "success",
       data: allTrades,
