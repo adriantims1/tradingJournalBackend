@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 const tradeSchema = Schema({
   userEmail: { type: String, required: [true, "userEmail is required"] },
   userId: { type: String, required: [true, "userId is required"] },
-  timeFrame: {
+  timeframe: {
     type: String,
     enum: ["1m", "5m", "15m", "1h", "4h", "daily"],
     required: [true, "timeFrame is required"],
@@ -15,10 +15,9 @@ const tradeSchema = Schema({
     type: String,
     required: [true, "marketInformation is required"],
   },
-  timeStamp: {
+  timestamp: {
     type: Date,
     default: Date.now,
-    required: [true, "timeStamp is required"],
   },
   takeProfitRatio: {
     type: Number,

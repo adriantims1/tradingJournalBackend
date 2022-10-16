@@ -10,5 +10,6 @@ router.route("/password").put(isLoggedIn, profileController.updatePassword);
 router.route("/").post(profileController.signup);
 router.route("/").put(isLoggedIn, profileController.updateProfilePictureOrName);
 router.route("/").delete(isLoggedIn, profileController.deleteUser);
+router.route("/session").get(profileController.checkSessionValid);
 
 module.exports = router;

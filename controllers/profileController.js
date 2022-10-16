@@ -40,13 +40,13 @@ exports.login = async (req, res) => {
         status: "fail",
         data: "Email/Password combination does not exist",
       });
-      return;
+    } else {
+      req.session.userId = user._id;
+      res.status(200).json({
+        status: "success",
+        data: { email, name: user.name, profileUrl: user.profileUrl },
+      });
     }
-    req.session.userId = user._id;
-    res.status(200).json({
-      status: "success",
-      data: { email, name: user.name, profileUrl: user.profileUrl },
-    });
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -59,10 +59,12 @@ exports.logout = async (req, res) => {
   try {
     req.session.userId = null;
     await req.session.destroy();
-    res.status(200).json({
+    req.session = null;
+    res.clearCookie("session").status(200).json({
       status: "success",
     });
   } catch (err) {
+    console.log(err);
     res.status(404).json({
       status: "fail",
       data: "Fail logging out user",
@@ -135,6 +137,30 @@ exports.updatePassword = async (req, res) => {
     res.status(500).json({
       status: "fail",
       data: "Fail updating user password",
+    });
+  }
+};
+
+exports.checkSessionValid = async (req, res) => {
+  try {
+    if (req.session.userId) {
+      res.status(200).json({
+        status: "success",
+        data: "Authorized",
+      });
+    } else {
+      req.session.userId = null;
+      await req.session.destroy();
+      req.session = null;
+      res.status(401).json({
+        status: "fail",
+        data: "Unauthorized",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      data: "Fail checking session",
     });
   }
 };

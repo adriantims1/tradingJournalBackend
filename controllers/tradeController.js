@@ -18,7 +18,7 @@ exports.fetchAllTradesByUserId = async (req, res) => {
 
 exports.addNewTrade = async (req, res) => {
   try {
-    const newTrade = new trade(req.body);
+    const newTrade = new trade({ userId: req.session.userId, ...req.body });
     await newTrade.save();
     res.status(201).json({
       status: "success",

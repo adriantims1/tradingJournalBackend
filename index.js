@@ -28,7 +28,7 @@ const sessionConfig = {
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
-
+  unset: "destroy",
   cookie: {
     httpOnly: false,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
