@@ -20,8 +20,10 @@ exports.addNewTrade = async (req, res) => {
   try {
     const newTrade = new trade({ userId: req.session.userId, ...req.body });
     await newTrade.save();
+    const allTrades = await trade.find({ userId: req.session.userId });
     res.status(201).json({
       status: "success",
+      data: allTrades,
     });
   } catch (errors) {
     res.status(400).json({
@@ -33,9 +35,15 @@ exports.addNewTrade = async (req, res) => {
 
 exports.deleteTradeById = async (req, res) => {
   try {
+    const { entryScreenshot } = await trade.findOne({ id: req.body.Id });
+    let parts = entryScreenshot.split("/");
+    let publicId = parts[parts.length - 1].split(".")[0];
+    await cloudinary.uploader.destroy(`Trade Pictures/${publicId}`);
     await trade.findOneAndDelete({ id: req.body.Id });
-    res.status(204).json({
+    const allTrades = await trade.find({ userId: req.session.userId });
+    res.status(200).json({
       status: "success",
+      data: allTrades,
     });
   } catch (err) {
     res.status(404).json({

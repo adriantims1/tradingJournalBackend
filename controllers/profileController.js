@@ -4,7 +4,7 @@ exports.signup = async (req, res) => {
   try {
     const { name, password, email } = req.body;
     const user = await profile.findOne({ email: email });
-    console.log(user);
+
     if (user) {
       res.status(403).json({
         status: "fail",
@@ -23,7 +23,6 @@ exports.signup = async (req, res) => {
       status: "success",
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       status: "fail",
       data: "Fail creating user",
@@ -64,7 +63,6 @@ exports.logout = async (req, res) => {
       status: "success",
     });
   } catch (err) {
-    console.log(err);
     res.status(404).json({
       status: "fail",
       data: "Fail logging out user",
@@ -90,7 +88,6 @@ exports.updateProfilePictureOrName = async (req, res) => {
       status: "success",
     });
   } catch (err) {
-    console.log(err);
     res.status(404).json({
       status: "fail",
       data: "Fail changing user profile picture",

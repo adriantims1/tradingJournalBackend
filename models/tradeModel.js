@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary").v2;
 require("mongoose-type-url");
 
 var Schema = mongoose.Schema;
@@ -58,13 +59,17 @@ const tradeSchema = Schema({
     type: mongoose.SchemaTypes.Url,
     required: [true, "entryScreenshot is required"],
   },
+  real: {
+    type: Boolean,
+    required: [true, "real is required"],
+  },
 });
 
 tradeSchema.virtual("day").get(() => {
-  return this.Timestamp.getDay();
+  return this.timestamp.getDay();
 });
 tradeSchema.virtual("time").get(() => {
-  return this.Timestamp.toLocaleString("en-US", {
+  return this.timestamp.toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
