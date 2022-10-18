@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://adrianthe.engineer",
+    origin: "https://www.adrianthe.engineer",
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
   })
 );
