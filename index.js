@@ -33,7 +33,7 @@ const sessionConfig = {
     httpOnly: false,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    secure: true,
+    secure: false,
     // TODO add: 'secure: true' once the website is hosted on HTTPS.
   },
 };
@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://adrianthe.engineer",
+    origin: "https://adrianthe.engineer",
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
   })
 );
