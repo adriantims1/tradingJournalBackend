@@ -60,7 +60,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.enable("trust proxy");
+app.enable("trust proxy");
 
 // TODO: Add router here
 app.get("/", (req, res) => {
