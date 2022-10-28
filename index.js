@@ -7,7 +7,7 @@ const MongoStore = require("connect-mongo"); // MongoDB session store
 const cloudinary = require("cloudinary").v2;
 const app = express();
 
-const tradeRouter = require("./routes/tradeRoute");
+const futureRouter = require("./routes/futureRoute");
 const profileRouter = require("./routes/profileRoute");
 
 const sessionSecret = "secretString-sessionSecret";
@@ -65,7 +65,7 @@ app.enable("trust proxy");
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-app.use("/api/trade", tradeRouter);
+app.use("/api/future", futureRouter);
 app.use("/api/profile", profileRouter);
 
 //---------------

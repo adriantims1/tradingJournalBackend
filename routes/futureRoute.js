@@ -1,5 +1,5 @@
 const express = require("express");
-const tradeController = require("../controllers/tradeController");
+const futureController = require("../controllers/futureController");
 const multer = require("multer");
 const path = require("path");
 const upload = multer({
@@ -17,11 +17,11 @@ const { isLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.route("/").get(isLoggedIn, tradeController.fetchAllTradesByUserId);
-router.route("/").post(tradeController.addNewTrade);
-router.route("/").delete(tradeController.deleteTradeById);
+router.route("/").get(isLoggedIn, futureController.fetchAllfuturesByUserId);
+router.route("/").post(futureController.addNewfuture);
+router.route("/").delete(futureController.deletefutureById);
 router
   .route("/picture")
-  .post(upload.single("image"), tradeController.uploadPicture);
+  .post(upload.single("image"), futureController.uploadPicture);
 
 module.exports = router;
