@@ -34,7 +34,7 @@ const sessionConfig = {
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     secure: true,
-    sameSite: "none",
+    // sameSite: "none",
     // TODO add: 'secure: true' once the website is hosted on HTTPS.
   },
 };
@@ -51,7 +51,8 @@ app.use(
   cors({
     credentials: true,
     origin: "https://www.adrianthe.engineer",
-    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
+    // origin: "http://localhost:3000",
+    // methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
   })
 );
 app.use((req, res, next) => {
@@ -59,7 +60,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.enable("trust proxy");
+// app.enable("trust proxy");
 
 // TODO: Add router here
 app.get("/", (req, res) => {

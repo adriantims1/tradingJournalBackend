@@ -26,6 +26,7 @@ exports.addNewFuture = async (req, res) => {
       data: allfutures,
     });
   } catch (errors) {
+    console.log(errors);
     res.status(400).json({
       status: "fail",
       data: "Check the future detail",
