@@ -1,54 +1,54 @@
-const trade = require("../models/futureModel");
+const future = require("../models/futureModel");
 const cloudinary = require("cloudinary").v2;
 
-exports.fetchAllTradesByUserId = async (req, res) => {
+exports.fetchAllFuturesByUserId = async (req, res) => {
   try {
-    const allTrades = await trade.find({ userId: req.session.userId });
+    const allfutures = await future.find({ userId: req.session.userId });
     res.status(200).json({
       status: "success",
-      data: allTrades,
+      data: allfutures,
     });
   } catch (err) {
     res.status(500).json({
       status: "fail",
-      data: "Fetching All Trade Fails",
+      data: "Fetching All future Fails",
     });
   }
 };
 
-exports.addNewTrade = async (req, res) => {
+exports.addNewFuture = async (req, res) => {
   try {
-    const newTrade = new trade({ userId: req.session.userId, ...req.body });
-    await newTrade.save();
-    const allTrades = await trade.find({ userId: req.session.userId });
+    const newfuture = new future({ userId: req.session.userId, ...req.body });
+    await newfuture.save();
+    const allfutures = await future.find({ userId: req.session.userId });
     res.status(201).json({
       status: "success",
-      data: allTrades,
+      data: allfutures,
     });
   } catch (errors) {
     res.status(400).json({
       status: "fail",
-      data: "Check the trade detail",
+      data: "Check the future detail",
     });
   }
 };
 
-exports.deleteTradeById = async (req, res) => {
+exports.deleteFutureById = async (req, res) => {
   try {
-    const { entryScreenshot } = await trade.findOne({ id: req.body.Id });
+    const { entryScreenshot } = await future.findOne({ id: req.body.Id });
     let parts = entryScreenshot.split("/");
     let publicId = parts[parts.length - 1].split(".")[0];
-    await cloudinary.uploader.destroy(`Trade Pictures/${publicId}`);
-    await trade.findOneAndDelete({ id: req.body.Id });
-    const allTrades = await trade.find({ userId: req.session.userId });
+    await cloudinary.uploader.destroy(`future Pictures/${publicId}`);
+    await future.findOneAndDelete({ id: req.body.Id });
+    const allfutures = await future.find({ userId: req.session.userId });
     res.status(200).json({
       status: "success",
-      data: allTrades,
+      data: allfutures,
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      data: "Check the trade id",
+      data: "Check the future id",
     });
   }
 };
@@ -56,7 +56,7 @@ exports.deleteTradeById = async (req, res) => {
 exports.uploadPicture = async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "Trade Pictures",
+      folder: "Future Pictures",
     });
     res.status(201).json({
       status: "success",

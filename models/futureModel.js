@@ -3,7 +3,7 @@ require("mongoose-type-url");
 
 var Schema = mongoose.Schema;
 
-const tradeSchema = Schema({
+const futureSchema = Schema({
   userEmail: { type: String, required: [true, "userEmail is required"] },
   userId: { type: String, required: [true, "userId is required"] },
   timeframe: {
@@ -64,10 +64,10 @@ const tradeSchema = Schema({
   },
 });
 
-tradeSchema.virtual("day").get(() => {
+futureSchema.virtual("day").get(() => {
   return this.timestamp.getDay();
 });
-tradeSchema.virtual("time").get(() => {
+futureSchema.virtual("time").get(() => {
   return this.timestamp.toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
@@ -75,4 +75,4 @@ tradeSchema.virtual("time").get(() => {
   });
 });
 
-module.exports = mongoose.model("trade", tradeSchema);
+module.exports = mongoose.model("future", futureSchema);

@@ -17,9 +17,9 @@ const { isLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.route("/").get(isLoggedIn, futureController.fetchAllfuturesByUserId);
-router.route("/").post(futureController.addNewfuture);
-router.route("/").delete(futureController.deletefutureById);
+router.route("/").get(isLoggedIn, futureController.fetchAllFuturesByUserId);
+router.route("/").post(futureController.addNewFuture);
+router.route("/").delete(futureController.deleteFutureById);
 router
   .route("/picture")
   .post(upload.single("image"), futureController.uploadPicture);
