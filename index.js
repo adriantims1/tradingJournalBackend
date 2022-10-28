@@ -34,7 +34,7 @@ const sessionConfig = {
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     secure: true,
-    // sameSite: "none",
+    sameSite: "none",
     // TODO add: 'secure: true' once the website is hosted on HTTPS.
   },
 };
